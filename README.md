@@ -1,11 +1,12 @@
 # product-spec-skills
 
-Claude Code Skills for product specification review, task breakdown, and test planning.
+Claude Code Skills for product specification generation, review, task breakdown, and test planning.
 
 ## Skills
 
 | Skill | Command | Description |
 |-------|---------|-------------|
+| [spec-gen](./spec-gen/SKILL.md) | `/spec-gen` | Generate structured spec from any input (text, images, Figma, docs) |
 | [spec-review](./spec-review/SKILL.md) | `/spec-review` | Evaluate spec quality with A-F grading across 4 dimensions |
 | [spec-to-tasks](./spec-to-tasks/SKILL.md) | `/spec-to-tasks` | Break spec into Epic → Story → Task hierarchy |
 | [spec-to-tests](./spec-to-tests/SKILL.md) | `/spec-to-tests` | Generate test strategy and test cases from spec |
@@ -23,10 +24,10 @@ Copy the skill directories to your Claude Code skills folder:
 
 ```bash
 # User-level (all projects)
-cp -r spec-review spec-to-tasks spec-to-tests ~/.claude/skills/
+cp -r spec-gen spec-review spec-to-tasks spec-to-tests ~/.claude/skills/
 
 # Project-level (single project)
-cp -r spec-review spec-to-tasks spec-to-tests .claude/skills/
+cp -r spec-gen spec-review spec-to-tasks spec-to-tests .claude/skills/
 ```
 
 ## Prerequisites
@@ -42,6 +43,15 @@ The following MCP servers should be configured for full functionality:
 ## Usage
 
 ```bash
+# Generate a spec from a description
+/spec-gen 用户登录功能需要支持手机号和邮箱两种方式
+
+# Generate a spec from a screenshot
+/spec-gen /path/to/mockup.png
+
+# Generate a spec from Figma
+/spec-gen https://www.figma.com/design/xxx
+
 # Review a spec from a local file
 /spec-review /path/to/spec.md
 
@@ -53,18 +63,16 @@ The following MCP servers should be configured for full functionality:
 
 # Generate test plan from a Coding defect
 /spec-to-tests https://myteam.coding.net/p/project/defect/123
-
-# Direct description
-/spec-review 用户登录功能需要支持手机号和邮箱两种方式
 ```
 
 ## Workflow
 
 Recommended order:
 
-1. `/spec-review` — Evaluate and improve the spec quality first
-2. `/spec-to-tasks` — Break the reviewed spec into development tasks
-3. `/spec-to-tests` — Generate test plan from the spec
+1. `/spec-gen` — Generate a structured spec from any input
+2. `/spec-review` — Evaluate and improve the spec quality
+3. `/spec-to-tasks` — Break the reviewed spec into development tasks
+4. `/spec-to-tests` — Generate test plan from the spec
 
 ## License
 
